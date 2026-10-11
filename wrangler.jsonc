@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rlc-weather-preview",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "assets": {"directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"]},
+  "triggers": {"crons": ["*/10 * * * *"]},
+  "kv_namespaces": [{"binding": "WEATHER", "id": "REPLACE_WITH_AUTHORIZED_NAMESPACE_ID"}],
+  "vars": {
+    "MET_USER_AGENT": "",
+    "IQAIR_ENABLED": "false",
+    "IQAIR_DISPLAY_RIGHTS_CONFIRMED": "false",
+    "IQAIR_REFRESH_MINUTES": "120"
+  }
+}

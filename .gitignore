@@ -1,0 +1,5 @@
+node_modules/
+.weather-data/
+.wrangler/
+.env
+*.log

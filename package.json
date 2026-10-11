@@ -1,0 +1,22 @@
+{
+  "name": "rlc-weather-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "preview": "node scripts/preview.js",
+    "sample": "node scripts/sample.js",
+    "dev": "wrangler dev --test-scheduled",
+    "check": "node --check src/index.js && node --check src/providers.js && node --check public/app.js",
+    "refresh": "node scripts/node-adapter.js --once",
+    "serve": "node scripts/node-adapter.js --serve"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  },
+  "license": "MIT"
+}

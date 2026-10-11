@@ -1,0 +1,42 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: weather-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm test && npm run check
+      - name: Configure dedicated SSH access
+        env:
+          DEPLOY_KEY: ${{ secrets.VPS_DEPLOY_KEY }}
+          KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_KEY" > "$HOME/.ssh/weather-deploy-key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/weather-deploy-key" "$HOME/.ssh/known_hosts"
+      - name: Deploy audited source archive
+        env:
+          DEPLOY_HOST: ${{ vars.VPS_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.VPS_DEPLOY_USER }}
+        run: |
+          git archive --format=tar.gz HEAD > /tmp/weather-release.tar.gz
+          ssh -T -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -i "$HOME/.ssh/weather-deploy-key" "$DEPLOY_USER@$DEPLOY_HOST" < /tmp/weather-release.tar.gz
+      - name: Verify public report
+        env:
+          PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+        run: curl --fail --silent --show-error --retry 5 "$PUBLIC_URL/api/report" > /dev/null

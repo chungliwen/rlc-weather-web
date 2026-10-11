@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-10-11T06:00:00.000Z",
+  "slot": "1400",
+  "window": {
+    "slot": "1400",
+    "session": "Evening tennis",
+    "timezone": "Asia/Kuala_Lumpur",
+    "start_at": "2026-10-11T08:30:00.000Z",
+    "end_at": "2026-10-11T11:30:00.000Z",
+    "status": "upcoming"
+  },
+  "risk": {
+    "score": 48,
+    "label": "Moderate",
+    "confidence": "Medium",
+    "evidence": [
+      "Rain about 8.2 km W of RLC"
+    ]
+  },
+  "forecast": {
+    "available": true,
+    "generated_at": "2026-10-11T05:30:00.000Z",
+    "stale": false,
+    "temperature_c": 30,
+    "humidity_percent": 74,
+    "wind_mps": 2,
+    "symbol": "lightrainshowers_day",
+    "max_probability": null,
+    "precipitation_mm": 0.8,
+    "score": 45,
+    "window_start_at": "2026-10-11T08:30:00.000Z",
+    "window_end_at": "2026-10-11T11:30:00.000Z"
+  },
+  "radar": {
+    "available": true,
+    "status": "nearby",
+    "nearest_km": 8.2,
+    "direction": "W",
+    "observed_at": "2026-10-11T05:50:00Z",
+    "generated_at": "2026-10-11T05:55:00Z"
+  },
+  "air_quality": {
+    "metric": "US AQI",
+    "aqi": 42,
+    "observed_at": "2026-10-11T05:00:00.000Z",
+    "name": "Kuala Lumpur",
+    "available": true,
+    "stale": false,
+    "age_minutes": 60,
+    "category": "Good",
+    "guidance": "No outdoor-activity restriction indicated."
+  },
+  "feels_like_c": 36.03886131111113,
+  "data_complete": true,
+  "advisory": "Guidance only. Check the court and changing conditions before playing.",
+  "sample": true,
+  "report_stale": false,
+  "attribution": [
+    {
+      "name": "MET Norway",
+      "url": "https://www.met.no/en",
+      "license": "CC BY 4.0"
+    },
+    {
+      "name": "RainViewer",
+      "url": "https://www.rainviewer.com"
+    },
+    {
+      "name": "IQAir",
+      "url": "https://www.iqair.com/air-quality/malaysia/kuala-lumpur/kuala-lumpur"
+    }
+  ]
+}
