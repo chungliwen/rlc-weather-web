@@ -4,4 +4,22 @@
 <section id="notice" role="status">Loading the latest report…</section>
 <section class="dashboard" aria-label="Weather report"><article class="hero"><p class="eyebrow" id="session">NEXT SESSION</p><h2 id="risk">Checking conditions</h2><p id="window">All times shown in Malaysia time</p><p id="evidence"></p><div class="court" aria-hidden="true"><div></div><i></i></div></article>
 <div class="details"><article><p class="eyebrow">FORECAST</p><h2 id="temperature">—</h2><p id="forecast">Awaiting forecast</p></article><article><p class="eyebrow">AIR QUALITY · CITY LEVEL</p><h2 id="aqi">—</h2><p id="aqi-detail">Awaiting air quality</p></article><article><p class="eyebrow">HISTORICAL RADAR</p><h2 id="radar">—</h2><p id="radar-detail">Past observations only, not a rain prediction</p></article></div></section>
-<footer><p id="updated"></p><p>Guidance only. Check actual court conditions before playing. Rain risk is a heuristic score, not a calibrated probability.</p><p id="attribution"><a href="https://www.met.no/en">MET Norway</a> · <a href="https://www.rainviewer.com">RainViewer</a></p></footer></main></body></html>
+<footer><p id="updated"></p><p>Guidance only. Check actual court conditions before playing. Rain risk is a heuristic score, not a calibrated probability.</p><p id="attribution"><a href="https://www.met.no/en">MET Norway</a> · <a href="https://www.rainviewer.com">RainViewer</a></p></footer>
+<details class="developer-note">
+<summary>How this works · Contribute</summary>
+<div class="developer-content">
+<p>This little community project brings together a forecast and recent radar observations to give you some context before playing. It is independent of the club, and it cannot tell you whether a court is safe. Always check conditions where you are.</p>
+<h2>Where the report comes from</h2>
+<p>MET Norway supplies the forecast for Royal Lake Club’s location. RainViewer supplies up to six recent historical radar images, checked for nearby rain echoes. Radar shows what has been observed; it is not a prediction of where rain will go. IQAir air-quality readings are currently disabled until access and public-display permissions are confirmed.</p>
+<h2>For the curious</h2>
+<ul>
+<li>Plain JavaScript runs on Node 22 or newer. One scheduled writer refreshes an atomic JSON snapshot; the page reads it through a read-only API. There is no public refresh endpoint.</li>
+<li>The report refreshes every ten minutes, and an open page checks it once a minute. Provider data can update less often: MET’s expiry and conditional-request rules are respected, and radar metadata is checked at most every ten minutes.</li>
+<li>Each API read checks freshness again. A report older than twenty minutes suppresses current risk guidance. Forecasts older than twelve hours and radar observations older than thirty minutes cannot provide current guidance; missing or invalid data is shown as unavailable.</li>
+<li>The rain-risk score combines forecast information and recent radar observations using a simple heuristic. It is not a calibrated probability, storm-tracking model or safety assessment. Coverage and provider failures can leave the report incomplete.</li>
+</ul>
+<h2>Help make it better</h2>
+<p>Have a better way to understand weather around the club? Developers are welcome to explore the MIT-licensed <a href="https://github.com/chungliwen/rlc-weather-web">source on GitHub</a>, <a href="https://github.com/chungliwen/rlc-weather-web/issues">share an issue or idea</a>, or <a href="https://github.com/chungliwen/rlc-weather-web/pulls">submit a pull request</a>. Improvements to data coverage, clarity and reliability are especially welcome. The repository explains the calculations, tests and providers’ separate data terms.</p>
+</div>
+</details>
+</main></body></html>
